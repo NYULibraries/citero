@@ -10,7 +10,9 @@ module Citero
         (private_methods).each do |method_sym|
           output += send(method_sym) if method_sym.to_s.start_with? "output_"
         end
-        puts output
+        # binding.pry
+        # puts output
+        output
       end
 
       private

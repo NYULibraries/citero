@@ -2,7 +2,6 @@ module Citero
   class CSF
     attr_reader :raw_data
     def initialize(data=nil)
-      raw_data = data
       @csf_hash = Hash.new
       csf_string_to_obj(data) if data.is_a? String
       @csf_hash = data if data.is_a? Hash
@@ -11,7 +10,6 @@ module Citero
     def csf
       self
     end
-
 
     #better names
     def add(key,value)
@@ -39,6 +37,8 @@ module Citero
     def to_s
       @csf_hash
     end
+
+    private
 
     def csf_string_to_obj(data)
       lines = data.split("\n")

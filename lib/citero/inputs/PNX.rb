@@ -3,7 +3,7 @@ module Citero
     class PNX
 
       attr_reader :csf
-      
+
       def initialize(raw_data)
         @pnx_reader = Citero::Inputs::Readers::PnxReader.new(raw_data)
         construct_csf
@@ -51,16 +51,16 @@ module Citero
         contributors = []
 
         creators = @pnx_reader.creator || @pnx_reader.contributor
-        contributors = @pnx_reader.contributor unless creators.empty?
+        contributors = @pnx_reader.contributor unless creators.to_s.empty?
 
-        creators = @pnx_reader.addau if (@pnx_reader.creator.empty? && @pnx_reader.contributor.empty?)
+        creators = @pnx_reader.addau if (@pnx_reader.creator.to_s.empty? && @pnx_reader.contributor.to_s.empty?)
 
         add_creators(creators, "author")
         add_creators(contributors, "contributor")
       end
 
       def add_creators(creators,creator_type)
-        if (!creators.empty?)
+        if (!creators.to_s.empty?)
           creators.split(";").each do |name|
             @csf.add(creator_type, name.strip)
           end

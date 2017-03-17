@@ -3,15 +3,18 @@ module Citero
     class OpenUrl
       require 'open-uri'
       def initialize(csf)
+        require 'pry'
+        # binding.pry
         @csf = csf.csf
       end
 
       def to_openurl
         output = ""
-        (private_methods - Object.private_methods - Module.methods).each do |method_sym|
-          output += send(method_sym) if method_sym.to_s.start_with? "output_"
+        output_methods.each do |method_sym|
+          output += send(method_sym)
         end
-        puts output
+        # binding.pry
+        output.chop if output.last.eql? "&"
       end
 
       private
@@ -22,23 +25,24 @@ module Citero
         key = "rft.#{key}" if with_prefix
         if value.is_a?(Array)
           value.each do |val|
-            val = URI::encode(val) if encoded
+            val = ERB::Util::url_encode(val) if encoded
             output += "#{key}=#{val}&"
           end
         else
-          value = URI::encode(value) if encoded
+          value = ERB::Util::url_encode(value) if encoded
           output += "#{key}=#{value}&"
         end
         output
       end
 
       def output_start
-        openurl_param("ulr_ver", "Z39.88-2004")
-        openurl_param("ctx_ver", "Z39.88-2004")
+        output = ""
+        output += openurl_param("ulr_ver", "Z39.88-2004")
+        output += openurl_param("ctx_ver", "Z39.88-2004")
         if @csf['pnxRecordId']
-          openurl_param("rfr_id", "info:sid/primo.exlibrisgroup.com:primo-#{@csf['pnxRecordId']}", false)
+          output += openurl_param("rfr_id", "info:sid/primo.exlibrisgroup.com:primo-#{@csf['pnxRecordId']}", false, false)
         else
-          openurl_param("rfr_id", "info:sid/libraries.nyu.edu:citero", false)
+          output += openurl_param("rfr_id", "info:sid/libraries.nyu.edu:citero", false, false)
         end
       end
 
@@ -51,8 +55,13 @@ module Citero
       end
 
       def output_type
-        openurl_param('rft_val_fmlt', type_output_map[@csf['itemType']], false, false) if type_output_map[@csf['itemType']]
-        openurl_param('rft_val_fmlt', "info:ofi/fmt:kev:mtx:book", false, false)
+        if type_output_map[@csf['itemType']]
+          str = openurl_param('rft_val_fmlt', type_output_map[@csf['itemType']], false, false)
+          str += openurl_param('genre', genre_output_map[@csf['itemType']]) if genre_output_map[@csf['itemType']]
+          str
+        else
+          openurl_param('rft_val_fmlt', "info:ofi/fmt:kev:mtx:book", false, false) + openurl_param('genre', "book")
+        end
       end
 
       def output_date
@@ -111,9 +120,9 @@ module Citero
         openurl_param('place', @csf['place'])
       end
 
-      def output_date
-        openurl_param('PY', @csf['date'])
-      end
+      # def output_date
+      #   openurl_param('PY', @csf['date'])
+      # end
 
       def output_abstractNote
         openurl_param('description', @csf['abstractNote'])
@@ -131,10 +140,6 @@ module Citero
         openurl_param('tpages', @csf['numPages'])
       end
 
-      def output_isbn
-        openurl_param('isbn', @csf['isbn'])
-      end
-
       def output_issn
         openurl_param('issn', @csf['issn'])
       end
@@ -145,12 +150,55 @@ module Citero
 
       def type_output_map
         @type_output_map ||= {
-                            "bookSection"       => "info:ofi/fmt:kev:mtx:book",
-                            "journalArticle"    => "info:ofi/fmt:kev:mtx:journal",
-                            "thesis"            => "info:ofi/fmt:kev:mtx:dissertation",
-                            "patent"            => "info:ofi/fmt:kev:mtx:patent",
-                            "webpage"           => "info:ofi/fmt:kev:mtx:dc"
-                          }
+          "bookSection"       => "info:ofi/fmt:kev:mtx:book",
+          "journalArticle"    => "info:ofi/fmt:kev:mtx:journal",
+          "thesis"            => "info:ofi/fmt:kev:mtx:dissertation",
+          "patent"            => "info:ofi/fmt:kev:mtx:patent",
+          "webpage"           => "info:ofi/fmt:kev:mtx:dc"
+        }
+      end
+
+      def genre_output_map
+        @genre_output_map ||= {
+          "bookSection"       => "bookitem",
+          "conferencePaper"   => "conference",
+          "report"            => "report",
+          "document"          => "document",
+          "journalArticle"    => "article",
+          "thesis"            => "dissertation",
+          "patent"            => "patent"
+        }
+      end
+
+      def output_methods
+        @output_methods ||= [
+          :output_start,
+          :output_doi,
+          :output_isbn,
+          :output_type,
+          :output_date,
+          :output_title,
+          :output_author,
+          :output_bookTitle,
+          :output_publicationTitle,
+          :output_edition,
+          :output_contributor,
+          :output_assignee,
+          :output_volume,
+          :output_reportNumber,
+          :output_issue,
+          :output_patentNumber,
+          :output_publisher,
+          :output_place,
+          :output_date,
+          :output_abstractNote,
+          :output_startPage,
+          :output_endPage,
+          :output_numPages,
+          :output_isbn,
+          :output_issn,
+          :output_tags
+        ]
       end
     end
   end
