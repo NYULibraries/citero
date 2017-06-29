@@ -35,10 +35,10 @@ describe Citero::Utils::NameFormatter do
         end
       end
       context "with unrelated data pertaining to the person" do
-        let(:name)                { "First  Last (dd) 1943-" }
+        let(:name)                { "First Middle   Last (dd) 1943-" }
 
         it "removes unrelated data pertaining to the person, returns with 'last name, first name middle name'" do
-          expect(standardized_name).to eq "Last, First"
+          expect(standardized_name).to eq "Last, First Middle"
         end
       end
     end
