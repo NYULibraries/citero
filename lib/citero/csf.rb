@@ -1,29 +1,24 @@
 module Citero
   class CSF
     attr_reader :raw_data
-    def initialize(data=nil)
+    def initialize()
       @csf_hash = Hash.new
-      csf_string_to_obj(data) if data.is_a? String
-      @csf_hash = data if data.is_a? Hash
+    end
+
+    def load_from_hash(hash)
+      hash.keys.each do |key|
+        value = hash[key]
+        @csf_hash[key] = [@csf_hash[key], value].flatten.compact
+        @csf_hash[key] = @csf_hash[key].first if @csf_hash[key].size == 1
+      end
+    end
+
+    def load_from_yaml(data)
+      load_from_hash(YAML::parse(data))
     end
 
     def csf
       self
-    end
-
-    #better names
-    def add(key,value)
-      if @csf_hash.include? key
-        if @csf_hash[key].kind_of?(Array)
-          @csf_hash[key] << value unless @csf_hash[key].include? value
-        else
-          original_value = @csf_hash[key]
-          @csf_hash[key] = [original_value]
-          @csf_hash[key] << value unless @csf_hash[key].include? value
-        end
-      else
-        @csf_hash[key] = value
-      end
     end
 
     def [](param)
@@ -35,22 +30,15 @@ module Citero
     end
 
     def to_s
-      @csf_hash
-    end
-
-    private
-
-    def csf_string_to_obj(data)
-      lines = data.split("\n")
-      # itemType: book
-      # author: hannan; barnaby
-      # author: eric
-      # fix for semicolons
-      lines.each do |line|
-        field, value = line.split(':').collect{|str| str.strip }
-        add(field,value)
+      hash = @csf_hash.dup
+      hash.each do |k,v|
+        v = [v].flatten.compact
+        # p v
+        v = v.collect {|a| a.gsub('.','\.').gsub(',','\,')}
+        v = v.first if v.size == 1
+        hash[k] = v
       end
+      hash
     end
   end
-
 end

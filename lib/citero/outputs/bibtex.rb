@@ -19,14 +19,14 @@ module Citero
 
       def bibtex_fields
         start = [""]
+        start << creators unless creators.empty?
+        start << publisher
         export_field_map.each do |key,value|
           start << map_to_bibtex_value(value,key)
         end
-        start << publisher
         start << note
         start << tags
         start << publicationTitle
-        start << creators
         start << pages
         start << webpage
         start.compact.join(",\n\t")
@@ -71,7 +71,8 @@ module Citero
       end
 
       def pages
-        add_to_bibtex_output('pages', @csf['pages'].gsub("-", "--"))
+        add_to_bibtex_output('pages', @csf['pages']&.gsub("-", "--"))
+        add_to_bibtex_output('numPages', @csf['numPages']&.gsub(",", "\\,"))
       end
 
       def webpage
@@ -80,11 +81,12 @@ module Citero
       end
 
       def expects_number_value?(key,value)
-        (/\A[-+]?\d+\z/ === value) && !['numpages','isbn','issn'].include?(key)
+        (/\A[-+]?\d+\z/ === value) && !['numPages','isbn','issn'].include?(key)
       end
 
       def add_to_bibtex_output(key,value)
         return if value.nil? || !value.class.eql?(Array) && value.strip.empty?
+        value = value.join(', ') if value.class.eql?(Array)
         output = "#{key} = "
         value = "{#{value}}" unless expects_number_value?(key,value)
         output = "#{output}#{value}"
@@ -114,7 +116,7 @@ module Citero
       end
 
       def cite_key_date
-        @csf['date'] || "????"
+        @csf['date'].first&.gsub(/[^0-9]/,'') || "????"
       end
 
       def export_type_map
@@ -146,12 +148,13 @@ module Citero
           "seriesNumber"    => "number",
           "patentNumber"    => "number",
           "issue"           => "number",
-          "date"            => "date",
           "place"           => "address",
           "section"         => "chapter",
           "rights"          => "copyright",
           "isbn"            => "isbn",
           "issn"            => "issn",
+          "title"           => "title",
+          "date"            => "date",
           "callNumber"      => "iccn",
           "archiveLocation" => "location",
           "shortTitle"      => "shorttitle",
@@ -159,11 +162,10 @@ module Citero
           "abstractNote"    => "abstract",
           "country"         => "nationality",
           "edition"         => "edition",
+          "language"        => "language",
           "type"            => "type",
           "series"          => "series",
-          "title"           => "title",
           "volume"          => "volume",
-          "language"        => "language",
           "assignee"        => "assignee"
         }
       end

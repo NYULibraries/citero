@@ -7,6 +7,7 @@ module Citero
       def initialize(raw_data)
         @pnx_reader = Citero::Inputs::Readers::PnxReader.new(raw_data)
         construct_csf
+        @csf
       end
 
       private
@@ -14,12 +15,15 @@ module Citero
       def construct_csf
         return @csf unless @csf.nil?
         @csf = CSF.new
+        @hash = {}
         add_item_type
         parse_and_add_creators
-        add_identifiers
         parse_and_add_publisher
+        pages
+        add_identifiers
         add_all_other_fields
-        @csf
+        @hash['importedFrom'] = 'PNX'
+        @csf.load_from_hash(@hash)
       end
 
 
@@ -44,25 +48,24 @@ module Citero
       end
 
       def add_item_type
-        @csf.add("itemType", get_item_type(@pnx_reader.type))
+        @hash["itemType"] = get_item_type(@pnx_reader.type)
       end
 
       def parse_and_add_creators
         contributors = []
 
         creators = @pnx_reader.creator || @pnx_reader.contributor
-        contributors = @pnx_reader.contributor unless creators.to_s.empty?
+        contributors = @pnx_reader.contributor if !@pnx_reader.creator.nil?
 
         creators = @pnx_reader.addau if (@pnx_reader.creator.to_s.empty? && @pnx_reader.contributor.to_s.empty?)
-
         add_creators(creators, "author")
         add_creators(contributors, "contributor")
       end
 
       def add_creators(creators,creator_type)
-        if (!creators.to_s.empty?)
+        if (creators && !creators.empty?)
           creators.split(";").each do |name|
-            @csf.add(creator_type, name.strip)
+            @hash[creator_type] = [@hash[creator_type], name.strip].flatten.compact
           end
         end
       end
@@ -72,44 +75,53 @@ module Citero
           identifiers =  @pnx_reader.identifier.split(";")
           identifiers.each do |id|
             if(id.include? "isbn")
-              @csf.add("isbn", id.match(/[0-9]+/)[0])
+              @hash['isbn'] = [@hash['isbn'], id.scan(/[0-9]+/).to_a.join].flatten.compact
             else
-              @csf.add("issn", id.match(/[0-9]+/)[0])
+              @hash['issn'] = [@hash['issn'], id.scan(/[0-9]+/).to_a.join].flatten.compact
             end
           end
+        else
+          @hash['eissn'] = @pnx_reader.eissn unless @pnx_reader.eissn.empty?
+          @hash['issn'] = [@hash['issn'], @pnx_reader.issn].flatten.compact unless @pnx_reader.issn.empty?
+          @hash['isbn'] = [@hash['isbn'], @pnx_reader.isbn].flatten.compact unless @pnx_reader.isbn.empty?
         end
       end
 
       def parse_and_add_publisher
-        if (!@pnx_reader.pub? && !@pnx_reader.cop? && @pnx_reader.publisher)
-          if @pnx_reader.publisher.contains? ":"
-            pub_place =  @pnx_reader.publisher.split(":")
-            add_publisher_and_place(pub_place.first, pub_place.second)
+        if (@pnx_reader.pub.empty? && @pnx_reader.cop.empty? && @pnx_reader.publisher)
+          if @pnx_reader.publisher.include? " : "
+            pub_place =  @pnx_reader.publisher.split(" : ",2).map(&:strip)
+            add_publisher_and_place(nil, pub_place.first)
           else
             add_publisher_and_place(@pnx_reader.publisher)
           end
         else
-          add_publisher_and_place(@pnx_reader.pub, @pnx_reader.pub)
+          add_publisher_and_place(@pnx_reader.pub, @pnx_reader.cop)
         end
       end
 
       def add_publisher_and_place(publisher = nil, place = nil)
-        @csf.add("publisher", publisher) if publisher
-        @csf.add("place", place) if place
+        @hash['publisher'] = publisher if publisher
+        @hash['place'] = place if place
+      end
+
+      def pages
+        return unless @pnx_reader.pages
+        raw_pages = @pnx_reader.pages.gsub(/[\(\)\[\]]/, "").gsub(/\D/, " ").strip()
+        @hash['numPages'] = raw_pages.split(" ").first unless raw_pages.empty?
       end
 
       def qualified_method_names
         @qualified_method_names ||= {
+          "title" => "title",
           "publicationDate" => "publication_date",
           "journalTitle" => "journal_title",
-          "callNumber" => "call_number",
-          "pnxRecordId" => "pnx_record_id",
-          "pages" => "pages",
-          "title" => "title",
           "date" => "date",
           "language" => "language",
           "edition" => "edition",
           "tags" => "tags",
+          "callNumber" => "call_number",
+          "pnxRecordId" => "pnx_record_id",
           "description" => "description",
           "notes" => "notes"
         }
@@ -117,7 +129,7 @@ module Citero
 
       def add_all_other_fields
         qualified_method_names.each do |standard_form, method_name|
-          @csf.add(standard_form, @pnx_reader.send(method_name.to_sym)) if @pnx_reader.send("#{method_name}?".to_sym)
+          @hash[standard_form] = @pnx_reader.send(method_name.to_sym) if @pnx_reader.send("#{method_name}?".to_sym)
         end
       end
     end

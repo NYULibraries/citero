@@ -7,8 +7,8 @@ module Citero
 
       def to_ris
         output = ""
-        (private_methods).each do |method_sym|
-          output += send(method_sym) if method_sym.to_s.start_with? "output_"
+        output_order.each do |method_sym|
+          output += send(method_sym)
         end
         # binding.pry
         # puts output
@@ -32,12 +32,12 @@ module Citero
         ris_output_line('TY', type_output_map[@csf['itemType']])
       end
 
-      def output_title
-        ris_output_line('TI', @csf['title'])
-      end
-
       def output_author
         ris_output_line('A1', @csf['author'])
+      end
+
+      def output_title
+        ris_output_line('TI', @csf['title'])
       end
 
       def output_bookTitle
@@ -97,7 +97,7 @@ module Citero
       end
 
       def output_date
-        ris_output_line('PY', @csf['date'])
+        ris_output_line('PY', @csf['date'].first)
       end
 
       def output_filingDate
@@ -129,11 +129,43 @@ module Citero
       end
 
       def output_tags
-        ris_output_line('KW', @csf['tags'])
+        ris_output_line('KW', @csf['tags']&.sort)
       end
 
       def output_ris_end
-        ris_output_line('ER', "\n\n")
+        "ER  -\n\n"
+      end
+
+      def output_order
+        [
+          :output_type,
+          :output_author,
+          :output_publisher,
+          :output_place,
+          :output_isbn,
+          :output_issn,
+          :output_title,
+          :output_bookTitle,
+          :output_publicationTitle,
+          :output_backupPublicationTitle,
+          :output_editor,
+          :output_contributor,
+          :output_assignee,
+          :output_volume,
+          :output_applicationNumber,
+          :output_reportNumber,
+          :output_issue,
+          :output_patentNumber,
+          :output_references,
+          :output_date,
+          :output_filingDate,
+          :output_abstractNote,
+          :output_startPage,
+          :output_endPage,
+          :output_url,
+          :output_tags,
+          :output_ris_end
+        ]
       end
 
       def type_output_map

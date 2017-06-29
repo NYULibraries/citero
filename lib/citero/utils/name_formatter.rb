@@ -5,6 +5,7 @@ module Citero
       def initialize(raw_name)
         return unless raw_name
         raw_name_array = raw_name.gsub(/\(.*\)/, "").gsub(",", ", ").gsub(/\s+/, " ").split
+        # puts raw_name_array
         raw_name_array.each_with_index do |name, index|
           if (name.include?(",") && index == 0)
             @last_name = name.gsub(",", "")
@@ -13,8 +14,9 @@ module Citero
           elsif (index == 1 && @first_name.nil? && @last_name)
             @first_name = name.gsub(",", "")
           elsif (index >= 1 && @first_name && index < raw_name_array.length - 1)
-            @middle_name = (@middle_name ? "" : " ") + name.gsub(",", "")
+            @middle_name = (@middle_name ? "#{@middle_name} " : "") + name.gsub(",", "")
           elsif (@first_name && @middle_name && name.match(/[a-zA-Z]+/))
+            # p "hs"
             @last_name = name.gsub(",", "")
           elsif (index > 1 && @first_name && @last_name)
             if (name.match(/[a-zA-Z\-'\.]+/))
@@ -42,6 +44,7 @@ module Citero
         @middle_name = @middle_name.strip if middle_name
         @last_name = @last_name.strip     if last_name
         @suffix = @suffix.strip           if @suffix
+
       end
       def to_standardized
         str_builder = ""

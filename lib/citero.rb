@@ -1,5 +1,4 @@
 module Citero
-  require "wtf_logger"
   require_relative 'citero/version'
   require_relative 'citero/csf'
   require_relative 'citero/inputs'
@@ -7,7 +6,7 @@ module Citero
   require_relative 'citero/utils'
 
   def self.from_formats
-    [:csf, :openurl, :pnx, :ris]
+    [:csf, :openurl, :pnx]
   end
 
   def self.to_formats
@@ -24,30 +23,37 @@ module Citero
   end
 
   def self.from_(format)
-    @from_format = format
+    @from_format = format.to_sym
     self
+  end
+
+  def self.csf
+    return nil unless @from_format
+    case @from_format
+      when :csf
+        from = Citero::CSF.new(@input)
+      when :openurl
+        from = Citero::Inputs::OpenUrl.new(@input)
+      when :pnx
+        from = Citero::Inputs::PNX.new(@input)
+      else
+        raise ArgumentError
+    end
+    return from.csf
   end
 
   def self.to_(format)
     @to_format = format.to_sym
-    # binding.pry if @input.eql?"itemType: note"
-
-    if format.eql? :csf
-      return Citero::CSF.new(@input).csf.to_s.to_s
-    end
-
 
     case @from_format
-    when :csf
-      from = Citero::CSF.new(@input)
-    when :ris
-      from = Citero::Inputs::RIS.new(@input)
-    when :openurl
-      from = Citero::Inputs::OpenUrl.new(@input)
-    when :pnx
-      from = Citero::Inputs::PNX.new(@input)
-    else
-      raise ArgumentError
+      when :csf
+        from = Citero::CSF.new(@input)
+      when :openurl
+        from = Citero::Inputs::OpenUrl.new(@input)
+      when :pnx
+        from = Citero::Inputs::PNX.new(@input)
+      else
+        raise ArgumentError
     end
 
 
@@ -62,6 +68,19 @@ module Citero
       return Citero::Outputs::EasyBib.new(from).to_easybib
     when :refworks_tagged
       return Citero::Outputs::RefworksTagged.new(from).to_refworks_tagged
+    when :csf
+      str = ""
+      from.csf.to_s.each do |k,v|
+        if v.kind_of?(Array)
+          v.each do |va|
+            str = "#{str}#{k}:#{va}\n"
+          end
+        else
+          str = "#{str}#{k}:#{v}\n"
+        end
+
+      end
+      return str
     end
   end
 

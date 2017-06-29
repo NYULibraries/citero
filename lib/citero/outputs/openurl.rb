@@ -2,9 +2,9 @@ module Citero
   module Outputs
     class OpenUrl
       require 'open-uri'
+      require "erb"
+      require "cgi"
       def initialize(csf)
-        require 'pry'
-        # binding.pry
         @csf = csf.csf
       end
 
@@ -13,8 +13,7 @@ module Citero
         output_methods.each do |method_sym|
           output += send(method_sym)
         end
-        # binding.pry
-        output.chop if output.last.eql? "&"
+        output.chop if output[-1].eql? "&"
       end
 
       private
@@ -25,11 +24,11 @@ module Citero
         key = "rft.#{key}" if with_prefix
         if value.is_a?(Array)
           value.each do |val|
-            val = ERB::Util::url_encode(val) if encoded
+            val = CGI::escape(val) if encoded
             output += "#{key}=#{val}&"
           end
         else
-          value = ERB::Util::url_encode(value) if encoded
+          value = CGI::escape(value) if encoded
           output += "#{key}=#{value}&"
         end
         output
@@ -120,10 +119,6 @@ module Citero
         openurl_param('place', @csf['place'])
       end
 
-      # def output_date
-      #   openurl_param('PY', @csf['date'])
-      # end
-
       def output_abstractNote
         openurl_param('description', @csf['abstractNote'])
       end
@@ -190,7 +185,6 @@ module Citero
           :output_patentNumber,
           :output_publisher,
           :output_place,
-          :output_date,
           :output_abstractNote,
           :output_startPage,
           :output_endPage,

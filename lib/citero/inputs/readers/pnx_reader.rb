@@ -3,7 +3,10 @@ module Citero
     module Readers
       class PnxReader
         require 'ox'
+
         def initialize(data)
+          @allow = data
+          Ox.default_options = Ox.default_options.merge({ skip: :skip_none })
           @data = Ox.parse(data)
         end
 
@@ -16,39 +19,39 @@ module Citero
         end
 
         def pub
-          @publisher ||= @data.locate("record/addata/pub")&.first&.text
+          @publisher ||= @data.locate("record/addata/pub").flatten.collect {|d| d.text}.flatten
         end
 
         def cop
-          @place_of_publication ||= @data.locate("record/addata/cop")&.first&.text
+          @place_of_publication ||= @data.locate("record/addata/cop").flatten.collect {|d| d.text}.flatten
         end
 
         def issn
-          @issn ||= @data.locate("record/addata/issn")&.first&.text
+          @issn ||= @data.locate("record/addata/issn").flatten.collect {|d| d.text}.flatten
         end
 
         def eissn
-          @eissn ||= @data.locate("record/addata/eissn")&.first&.text
+          @eissn ||= @data.locate("record/addata/eissn").flatten.collect {|d| d.text}.flatten
         end
 
         def isbn
-          @isbn ||= @data.locate("record/addata/isbn")&.first&.text
+          @isbn ||= @data.locate("record/addata/isbn").flatten.collect {|d| d.text}.flatten
         end
 
         def title
-          @title ||= @data.locate("record/display/title")&.first&.text
+          @title ||= @data.locate("record/display/title").flatten.collect {|d| d.text}.flatten
         end
 
         def publication_date
-          @publication_date ||= @data.locate("record/addata/date")&.first&.text
+          @publication_date ||= [@data.locate("record/addata/date")].flatten.collect {|d| d&.nodes}.flatten
         end
 
         def journal_title
-          @journal_title ||= @data.locate("record/addata/jtitle")&.first&.text
+          @journal_title ||= @data.locate("record/addata/jtitle").flatten.collect {|d| d.text}.flatten
         end
 
         def date
-          @date ||= @data.locate("record/display/creationdate")&.first&.text || @data.locate("record/search/creationdate")&.first&.text
+          @date ||= [@data.locate("record/display/creationdate") , @data.locate("record/search/creationdate")].flatten.collect {|d| d&.nodes}.flatten
         end
 
         def language
@@ -60,7 +63,11 @@ module Citero
         end
 
         def tags
-          @tags ||= @data.locate("record/search/subject")&.first&.text || @data.locate("record/display/subject")&.first&.text
+          @tags ||= [
+            @data.locate("record/search/subject")&.collect {|element| element&.nodes}.flatten,
+            @data.locate("record/display/subject")&.collect {|element| element&.nodes}.flatten
+          ].flatten
+          return @tags unless @tags.empty?
         end
 
         def call_number
@@ -76,7 +83,12 @@ module Citero
         end
 
         def notes
-          @notes ||= @data.locate("record/display/description")&.first&.text
+          notes = @data.locate("record/display/description").collect{ |element|
+            element = element.nodes while !element.is_a?(Array)
+            element.collect{|val| val.is_a?(String) ? val : val.value }
+          }.flatten
+
+          @notes ||= notes
         end
 
         def pages
