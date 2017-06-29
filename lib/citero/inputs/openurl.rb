@@ -3,7 +3,7 @@ module Citero
     class OpenUrl
       require 'open-uri'
       require 'cgi'
-      
+
       attr_reader :csf
 
       def initialize(raw_data)
@@ -51,7 +51,6 @@ module Citero
 
         hash.each do |k,v|
           v = [v].flatten.compact
-          # p v
           v = v.collect {|a| a.gsub(',','\,')}
           v = v.first if v.size == 1
           hash[k] = v
@@ -157,53 +156,45 @@ module Citero
         create_processed_sub_hash(key, params[value])
       end
 
-      def btitle#rft.btitle
+      def btitle
         key = 'title'             if ['book','report'].include?(item_type)
         key = 'publicationTitle'  if ['bookSection','conferencePaper'].include?(item_type)
         create_sub_hash(key, 'rft.btitle')
       end
 
-      def atitle#rft.atitle
+      def atitle
         key = 'title' if ['journalArticle','bookSection','conferencePaper'].include?(item_type)
         create_sub_hash(key, 'rft.atitle')
-        # && (type.equals("journalArticle") || type.equals("bookSection") || type.equals("conferencePaper"))) {
-        #   addProperty("title", ent.getValue());
       end
 
-      def jtitle#rft.jtitle
+      def jtitle
         key = 'publicationTitle' if ['journalArticle'].include?(item_type)
         create_sub_hash(key, 'rft.jtitle')
-      #   && type.equals("journalArticle")) {
-      #  addProperty("publicationTitle", ent.getValue());
-      end
-      def stitle#rft.stitle
-        key = 'journalAbbreviation' if ['journalArticle'].include?(item_type)
-        create_sub_hash(key, 'rft.stitle')
-        # && type.equals("journalArticle")) {
-        # addProperty("journalAbbreviation", ent.getValue());
       end
 
-      def title#(ent.getKey().equals("rft.title")) {
+      def stitle
+        key = 'journalAbbreviation' if ['journalArticle'].include?(item_type)
+        create_sub_hash(key, 'rft.stitle')
+      end
+
+      def title
         key = 'title'
         key = 'publicationTitle' if ['journalArticle','bookSection','conferencePaper'].include? item_type
         create_sub_hash(key, 'rft.title')
       end
 
-      def date#(ent.getKey().equals("rft.date")) {
+      def date
         key = "date"
         key = "issueDate" if item_type.eql? "patent"
         create_sub_hash(key , 'rft.date')
       end
 
-
-
-      def issn#(ent.getKey().equals("rft.issn") || (ent.getKey().equals("rft.eissn") && !prop.contains("\nissn: "))) {
+      def issn
         issn = [params['rft.issn'], params['rft.eissn']].flatten.compact.uniq.reject(&:empty?)
         create_processed_sub_hash("issn", issn)
       end
 
-      def author#((!queries.containsKey("rft.au") && !queries.containsKey("rft.creator")) && (ent.getKey().equals("rft.aulast") || ent.getKey().equals("rft.aufirst"))) {
-        # String author = queries.containsKey("rft.aulast") ? queries.get("rft.aulast") + (queries.containsKey("rft.aufirst") ? ", " + queries.get("rft.aufirst") : "") : queries.get("rft.aufirst");
+      def author
         first_name = params['rft.aufirst'].first&.strip
         last_name = params['rft.aulast'].first&.strip
 
@@ -220,9 +211,7 @@ module Citero
         create_processed_sub_hash("author", output_name)
       end
 
-      def inventor#(!queries.containsKey("rft.inventor") && (ent.getKey().equals("rft.invlast") || ent.getKey().equals("rft.invfirst"))) {
-        # String author = queries.get("rft.invlast")
-        # queries.get("rft.invfirst") : "")
+      def inventor
         first_name = params['rft.invfirst'].first
         last_name = params['rft.invlast'].first
         name = Citero::Utils::NameFormatter.new("#{first_name} #{last_name}")
@@ -230,25 +219,23 @@ module Citero
         create_processed_sub_hash("author", output_name)
       end
 
-      def authors#(ent.getKey().equals("rft.au") || ent.getKey().equals("rft.creator") || ent.getKey().equals("rft.addau"))
+      def authors
         authors = ['rft.au', 'rft.creator', 'rft.addau'].collect{|key| params[key]}.flatten.collect(&:to_s)
         authors.reject!(&:empty?)
         create_processed_sub_hash('author',  authors ) unless authors.empty?
       end
 
-
-
-      def isbn#(ent.getKey().equals("rft.isbn") && !prop.contains("\nisbn: ")) {
+      def isbn
         create_sub_hash("isbn", 'rft.isbn')
       end
 
-      def publisher#(ent.getKey().equals("rft.pub") || ent.getKey().equals("rft.publisher")) {
+      def publisher
         publisher = [params['rft.pub'], params['rft.publisher']].flatten
         create_processed_sub_hash("publisher", publisher)
       end
 
 
-      def thesis_elements#(type.equals("thesis"))
+      def thesis_elements
         hash = []
         hash << create_sub_hash("publisher", "rft.inst")
         hash << create_sub_hash("type", "rft.degree")
@@ -257,7 +244,7 @@ module Citero
         merged
       end
 
-      def patent_elements#(type.equals("patent")) {
+      def patent_elements
         hash = []
         hash << create_sub_hash("assignee", "rft.assignee")
         hash << create_sub_hash("patentNumber", "rft.number")
@@ -267,7 +254,7 @@ module Citero
         merged
       end
 
-      def webpage_elements#(type.equals("webpage")) {
+      def webpage_elements
         hash = []
         hash << create_sub_hash("abstractNote", "rft.description")
         hash << create_sub_hash("rights", "rft.rights")
