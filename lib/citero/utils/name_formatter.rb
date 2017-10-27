@@ -16,7 +16,6 @@ module Citero
           elsif (index >= 1 && @first_name && index < raw_name_array.length - 1)
             @middle_name = (@middle_name ? "#{@middle_name} " : "") + name.gsub(",", "")
           elsif (@first_name && @middle_name && name.match(/[a-zA-Z]+/))
-            # p "hs"
             @last_name = name.gsub(",", "")
           elsif (index > 1 && @first_name && @last_name)
             if (name.match(/[a-zA-Z\-'\.]+/))
