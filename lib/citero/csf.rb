@@ -1,44 +1,31 @@
 module Citero
   class CSF
-    attr_reader :raw_data
-    def initialize()
-      @csf_hash = Hash.new
+    extend Forwardable
+    def_delegators :@data, :[], :[]=, :size, :each, :inspect, :to_s
+    attr_reader :data
+    alias_method :csf, :data
+
+    def initialize(hash = nil)
+      @data = Hash.new
+      load_from_hash(hash) unless hash.nil?
     end
 
     def load_from_hash(hash)
-      hash.keys.each do |key|
-        value = hash[key]
-        @csf_hash[key] = [@csf_hash[key], value].flatten.compact
-        @csf_hash[key] = @csf_hash[key].first if @csf_hash[key].size == 1
+      hash.each_pair do |key,value|
+        next if value.nil?
+        self.send(:[]=, key, value)
       end
     end
 
-    def load_from_yaml(data)
-      load_from_hash(YAML::parse(data))
+    def []=(key,value)
+      @data[key] = element_or_list(@data[key], value)
     end
 
-    def csf
-      self
-    end
-
-    def [](param)
-      @csf_hash[param]
-    end
-
-    def inspect
-      @csf_hash
-    end
-
-    def to_s
-      hash = @csf_hash.dup
-      hash.each do |k,v|
-        v = [v].flatten.compact
-        # p v
-        v = v.collect {|a| a.gsub('.','\.').gsub(',','\,')}
-        v = v.first if v.size == 1
-        hash[k] = v
-      end
-      hash
+    private
+    def element_or_list(new_value, old_value)
+      temp_arr = [new_value, old_value].flatten.compact
+      return temp_arr.first if temp_arr.size == 1
+      return temp_arr
     end
   end
 end
