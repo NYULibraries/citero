@@ -10,8 +10,6 @@ module Citero
         output_order.each do |method_sym|
           output += send(method_sym)
         end
-        # binding.pry
-        # puts output
         output
       end
 
@@ -29,7 +27,7 @@ module Citero
       end
 
       def output_type
-        ris_output_line('TY', type_output_map[@csf['itemType']])
+        ris_output_line('TY', (type_output_map[@csf['itemType']] || "BOOK"))
       end
 
       def output_author
@@ -97,7 +95,7 @@ module Citero
       end
 
       def output_date
-        ris_output_line('PY', @csf['date'].first)
+        ris_output_line('PY', @csf['date']&.first)
       end
 
       def output_filingDate

@@ -21,7 +21,7 @@ module Citero
         key,val = line.split('-',2).collect {|x| x.strip }
         key = tag_map[key] if tag_map[key]
         val = type_map[val] if key.eql?('RT')
-        "#{key} #{val}\n\r"
+        "#{key} #{val}\n"
       end
 
       def tag_map

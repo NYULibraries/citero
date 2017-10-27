@@ -32,7 +32,7 @@ module Citero
       end
 
       def title
-        @title ||= { title: @csf['title']  } if @csf['title']
+        @title ||= { title: @csf['title']  }
       end
 
       def pubtype(type)
@@ -44,7 +44,9 @@ module Citero
       end
 
       def pubnonperiodical
-        title.merge(construct_json({
+        start = {}
+        start = title if @csf['title']
+        start.merge(construct_json({
           publisher: "publisher",
           city: "place",
           vol: "volume",
@@ -87,7 +89,9 @@ module Citero
             pages_hash = { end: @csf["firstPage"].to_i + @csf["numPages"].to_i }
           end
         else
+          if @csf["numPages"]
             pages_hash = { end: @csf["numPages"].to_i }
+          end
         end
         pages_hash.merge(construct_json({ start: "firstPage"}))
       end
