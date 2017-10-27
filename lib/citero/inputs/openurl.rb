@@ -4,7 +4,7 @@ module Citero
       require 'open-uri'
       require 'cgi'
 
-      attr_reader :csf
+      attr_reader :csf, :params
 
       def initialize(raw_data)
         @raw_data = raw_data
@@ -17,14 +17,7 @@ module Citero
         @csf    = CSF.new
         url     = @raw_data
         @params = CGI.parse(CGI::unescape(URI.parse(url).query))
-        @params.each do |key,values|
-          values = values.uniq.compact.reject { |value| value.empty? }
-          if values.empty?
-            @params.delete(key)
-          else
-            @params[key] = values
-          end
-        end
+        remove_blanks_from_params
 
         hash = [
           {"itemType" => item_type},
@@ -49,19 +42,20 @@ module Citero
           {"importedFrom" => "OpenURL"}
         ].compact.reduce({}, :merge)
 
-        hash.each do |k,v|
-          v = [v].flatten.compact
-          v = v.collect {|a| a.gsub(',','\,')}
-          v = v.first if v.size == 1
-          hash[k] = v
-        end
-
         @csf.load_from_hash(hash)
       end
 
-      def params
-        @params
+      def remove_blanks_from_params
+        @params.each do |key,values|
+          values = values.uniq.compact.reject(&:empty?)
+          if values.empty?
+            @params.delete(key)
+          else
+            @params[key] = values
+          end
+        end
       end
+
 
       def get_format(openurl_format)
         return simple_types[openurl_format] if simple_types.has_key?(openurl_format)
@@ -111,15 +105,15 @@ module Citero
           'rft.place'       =>  'place',
           'rft.edition'     =>  'edition',
           'rft.series'      =>  'series',
-          "rft.volume"    =>  "volume",
-          "rft.issue"   =>  "issue",
-          "rft.inventor"    =>  "inventor",
-          "rft.contributor"   =>  "contributor",
-          "rft.aucorp"    =>  "author",
-          "rft.pages" => "pages",
-          "rft.spage" => "startPage",
-          "rft.epage" => "endPage",
-          "rft.tpages" => "numPages"
+          'rft.volume'      =>  'volume',
+          'rft.issue'       =>  'issue',
+          'rft.inventor'    =>  'inventor',
+          'rft.contributor' =>  'contributor',
+          'rft.aucorp'      =>  'author',
+          'rft.pages'       =>  'pages',
+          'rft.spage'       =>  'startPage',
+          'rft.epage'       =>  'endPage',
+          'rft.tpages'      =>  'numPage'
         }
       end
 
@@ -147,13 +141,13 @@ module Citero
         return {}
       end
 
-      def create_processed_sub_hash(key, value)
+      def create_formatted_sub_hash(key, value)
         return nil unless key and value and !value.empty?
         return { key => value }
       end
 
       def create_sub_hash(key,value)
-        create_processed_sub_hash(key, params[value])
+        create_formatted_sub_hash(key, params[value])
       end
 
       def btitle
@@ -191,7 +185,7 @@ module Citero
 
       def issn
         issn = [params['rft.issn'], params['rft.eissn']].flatten.compact.uniq.reject(&:empty?)
-        create_processed_sub_hash("issn", issn)
+        create_formatted_sub_hash("issn", issn)
       end
 
       def author
@@ -205,10 +199,9 @@ module Citero
         output_name = name || params['rft.au'] || params['rft.creator']
 
         if first_name and last_name
-          pp create_processed_sub_hash("author", [output_name,output_name])
-          return create_processed_sub_hash("author", [output_name,output_name])
+          return create_formatted_sub_hash("author", [output_name,output_name])
         end
-        create_processed_sub_hash("author", output_name)
+        create_formatted_sub_hash("author", output_name)
       end
 
       def inventor
@@ -216,13 +209,13 @@ module Citero
         last_name = params['rft.invlast'].first
         name = Citero::Utils::NameFormatter.new("#{first_name} #{last_name}")
         output_name = name.to_standardized || params['rft.inventor']
-        create_processed_sub_hash("author", output_name)
+        create_formatted_sub_hash("author", output_name)
       end
 
       def authors
         authors = ['rft.au', 'rft.creator', 'rft.addau'].collect{|key| params[key]}.flatten.collect(&:to_s)
         authors.reject!(&:empty?)
-        create_processed_sub_hash('author',  authors ) unless authors.empty?
+        create_formatted_sub_hash('author',  authors ) unless authors.empty?
       end
 
       def isbn
@@ -231,7 +224,7 @@ module Citero
 
       def publisher
         publisher = [params['rft.pub'], params['rft.publisher']].flatten
-        create_processed_sub_hash("publisher", publisher)
+        create_formatted_sub_hash("publisher", publisher)
       end
 
 
@@ -264,10 +257,10 @@ module Citero
         hash << create_sub_hash("publicationTitle", "rft.source")
         unless params["rft.identifier"].empty?
           identifier = params["rft.identifier"].first
-          hash << create_processed_sub_hash("isbn",  (identifier - 'isbn').strip) if identifier.start_with? 'isbn'
-          hash << create_processed_sub_hash("issn",  (identifier - 'issn').strip) if identifier.start_with? 'issn'
-          hash << create_processed_sub_hash("doi", (identifier - 'urn:doi:').strip) if  identifier.start_with? 'urn:doi:'
-          hash << create_processed_sub_hash("url", identifier.strip) if identifier.match /^https?:\/\/.*/
+          hash << create_formatted_sub_hash("isbn",  (identifier - 'isbn').strip) if identifier.start_with? 'isbn'
+          hash << create_formatted_sub_hash("issn",  (identifier - 'issn').strip) if identifier.start_with? 'issn'
+          hash << create_formatted_sub_hash("doi", (identifier - 'urn:doi:').strip) if  identifier.start_with? 'urn:doi:'
+          hash << create_formatted_sub_hash("url", identifier.strip) if identifier.match /^https?:\/\/.*/
         end
         merged = hash.compact.reduce({}, :merge)
         return nil if merged.empty?

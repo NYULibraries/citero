@@ -1,6 +1,6 @@
 module Citero
   module Inputs
-    class PNX
+    class Pnx
 
       attr_reader :csf
 
@@ -48,7 +48,7 @@ module Citero
       end
 
       def add_item_type
-        @hash["itemType"] = get_item_type(@pnx_reader.type)
+        @hash["itemType"] = get_item_type(@pnx_reader.type || '')
       end
 
       def parse_and_add_creators
