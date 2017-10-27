@@ -31,11 +31,13 @@ module Citero
     return nil unless @from_format
     case @from_format
       when :csf
-        from = Citero::CSF.new(@input)
+        data = @input
+        data = csf_string_to_hash(data) if data.kind_of?(String)
+        from = Citero::CSF.new(data)
       when :openurl
         from = Citero::Inputs::OpenUrl.new(@input)
       when :pnx
-        from = Citero::Inputs::PNX.new(@input)
+        from = Citero::Inputs::Pnx.new(@input)
       else
         raise ArgumentError
     end
@@ -47,41 +49,52 @@ module Citero
 
     case @from_format
       when :csf
-        from = Citero::CSF.new(@input)
+        data = @input
+        data = csf_string_to_hash(data) if data.kind_of?(String)
+        from = Citero::CSF.new(data)
       when :openurl
         from = Citero::Inputs::OpenUrl.new(@input)
       when :pnx
-        from = Citero::Inputs::PNX.new(@input)
+        from = Citero::Inputs::Pnx.new(@input)
       else
         raise ArgumentError
     end
 
-
     case @to_format
-    when :ris
-      return Citero::Outputs::RIS.new(from).to_ris
-    when :openurl
-      return Citero::Outputs::OpenUrl.new(from).to_openurl
-    when :bibtex
-      return Citero::Outputs::Bibtex.new(from).to_bibtex
-    when :easybib
-      return Citero::Outputs::EasyBib.new(from).to_easybib
-    when :refworks_tagged
-      return Citero::Outputs::RefworksTagged.new(from).to_refworks_tagged
-    when :csf
-      str = ""
-      from.csf.to_s.each do |k,v|
-        if v.kind_of?(Array)
-          v.each do |va|
-            str = "#{str}#{k}:#{va}\n"
+      when :ris
+        return Citero::Outputs::RIS.new(from).to_ris
+      when :openurl
+        return Citero::Outputs::OpenUrl.new(from).to_openurl
+      when :bibtex
+        return Citero::Outputs::Bibtex.new(from).to_bibtex
+      when :easybib
+        return Citero::Outputs::EasyBib.new(from).to_easybib
+      when :refworks_tagged
+        return Citero::Outputs::RefworksTagged.new(from).to_refworks_tagged
+      when :csf
+        str = ""
+        from.csf.each do |k,v|
+          if v.kind_of?(Array)
+            v.each do |va|
+              str = "#{str}#{k}: #{va.gsub('.','\.').gsub(',','\,')}\n"
+            end
+          else
+            str = "#{str}#{k}: #{v.gsub('.','\.').gsub(',','\,')}\n"
           end
-        else
-          str = "#{str}#{k}:#{v}\n"
         end
-
-      end
-      return str
+        return str.chomp
     end
+  end
+
+  private
+
+  def csf_string_to_hash(string)
+    hash = {}
+    string.lines.map(&:strip).each do |line|
+      k,v = line.split(':',2).map(&:strip)
+      hash[k] = [hash[k],v].compact.flatten
+    end
+    hash
   end
 
   def self.method_missing(method_sym, *arguments, &block)
@@ -96,7 +109,14 @@ module Citero
   end
 
   def self.respond_to?(method_sym, *arguments, &block)
-    method_str = method_sym.to_s
-    (method_str.include? "to_") || (method_str.include? "from_") || (method_str.eql? "csf") || super
+    method_arr = method_sym.to_s.split('_',2)
+    return super unless method_arr.size > 1
+    if method_arr.first.eql?("from")
+      return self.from_formats.include?(method_arr.last.to_sym)
+    end
+    if method_arr.first.eql?("to")
+      return self.to_formats.include?(method_arr.last.to_sym)
+    end
+    super
   end
 end
