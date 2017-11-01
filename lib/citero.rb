@@ -88,7 +88,7 @@ module Citero
 
   private
 
-  def csf_string_to_hash(string)
+  def self.csf_string_to_hash(string)
     hash = {}
     string.lines.map(&:strip).each do |line|
       k,v = line.split(':',2).map(&:strip)
@@ -98,6 +98,7 @@ module Citero
   end
 
   def self.method_missing(method_sym, *arguments, &block)
+    super unless respond_to?(method_sym, *arguments, &block)
     method_str = method_sym.to_s
     if (method_str.include? "to_")
       to_(method_str.split('_',2).last)
