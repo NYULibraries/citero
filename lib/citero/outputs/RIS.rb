@@ -1,6 +1,6 @@
 module Citero
   module Outputs
-    class RIS
+    class Ris
       def initialize(csf)
         @csf = csf.csf
       end

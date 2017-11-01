@@ -62,7 +62,7 @@ module Citero
 
     case @to_format
       when :ris
-        return Citero::Outputs::RIS.new(from).to_ris
+        return Citero::Outputs::Ris.new(from).to_ris
       when :openurl
         return Citero::Outputs::OpenUrl.new(from).to_openurl
       when :bibtex

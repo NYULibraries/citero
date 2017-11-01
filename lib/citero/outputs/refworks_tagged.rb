@@ -1,6 +1,6 @@
 module Citero
   module Outputs
-    class RefworksTagged < RIS
+    class RefworksTagged < Ris
       def initialize(csf)
         super(csf)
         @csf = csf.csf

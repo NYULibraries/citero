@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Citero::Outputs::RIS do
+describe Citero::Outputs::Ris do
   describe "#initialize" do
   end
   describe "#to_ris" do
