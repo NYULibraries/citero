@@ -5,7 +5,6 @@ module Citero
       def initialize(raw_name)
         return unless raw_name
         raw_name_array = raw_name.gsub(/\(.*\)/, "").gsub(",", ", ").gsub(/\s+/, " ").split
-        # puts raw_name_array
         raw_name_array.each_with_index do |name, index|
           if (name.include?(",") && index == 0)
             @last_name = name.gsub(",", "")
