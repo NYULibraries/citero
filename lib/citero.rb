@@ -46,6 +46,7 @@ module Citero
 
   def self.to_(format)
     @to_format = format.to_sym
+    return @input if @from_format.eql?(@to_format)
 
     case @from_format
       when :csf
