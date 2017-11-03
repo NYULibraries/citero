@@ -29,7 +29,7 @@ module Citero
         start << publicationTitle
         start << pages
         start << webpage
-        start.compact.join(",\n\t")
+        start.compact.join(",\n")
       end
 
       def publisher
@@ -85,7 +85,10 @@ module Citero
       end
 
       def add_to_bibtex_output(key,value)
-        return if value.nil? || !value.class.eql?(Array) && value.strip.empty?
+        return if value.nil?
+        return if value.class.eql?(String) && value.strip.empty?
+        return if value.class.eql?(Array) && value.empty?
+        return if value.class.eql?(Hash) && value.empty?
         value = value.join(', ') if value.class.eql?(Array)
         output = "#{key} = "
         value = "{#{value}}" unless expects_number_value?(key,value)
