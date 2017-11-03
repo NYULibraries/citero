@@ -122,7 +122,9 @@ module Citero
         end
 
         def get_all_values_from_pnx(path)
-          @data.locate(path).flatten.collect(&:text)
+          return_val = @data.locate(path).flatten.collect(&:text)
+          return if return_val.nil?
+          return_val
         end
 
         def method_missing(method_sym, *arguments, &block)
