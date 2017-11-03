@@ -22,8 +22,10 @@ module Citero
     end
 
     private
-    def element_or_list(new_value, old_value)
-      temp_arr = [new_value, old_value].flatten.compact
+    def element_or_list(old_value, new_value)
+      return old_value if new_value.nil?
+      temp_arr = [old_value, new_value].flatten.compact
+      return nil if temp_arr.empty?
       return temp_arr.first if temp_arr.size == 1
       return temp_arr
     end
