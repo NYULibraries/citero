@@ -46,6 +46,7 @@ module Citero
 
   def self.to_(format)
     @to_format = format.to_sym
+    return @input if @from_format.eql?(@to_format)
 
     case @from_format
       when :csf
@@ -74,6 +75,7 @@ module Citero
       when :csf
         str = ""
         from.csf.each do |k,v|
+          next if v.nil?
           if v.kind_of?(Array)
             v.each do |va|
               str = "#{str}#{k}: #{va.gsub('.','\.').gsub(',','\,')}\n"
