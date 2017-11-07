@@ -20,16 +20,17 @@ module Citero
 
       def openurl_param(key,value, with_prefix = true, encoded = true)
         output = ""
-        return output if value.nil?
+        return output if value.nil? || key.nil?
         key = "rft.#{key}" if with_prefix
+        key = "#{key}=" unless key.include?('=')
         if value.is_a?(Array)
           value.each do |val|
             val = CGI::escape(val) if encoded
-            output += "#{key}=#{val}&"
+            output += "#{key}#{val}&"
           end
         else
           value = CGI::escape(value) if encoded
-          output += "#{key}=#{value}&"
+          output += "#{key}#{value}&"
         end
         output
       end
@@ -46,11 +47,11 @@ module Citero
       end
 
       def output_doi
-        openurl_param('rft_id=info:doi/', @csf['doi'])
+        openurl_param('rft_id=info:doi/', @csf['doi'], false)
       end
 
       def output_isbn
-        openurl_param('rft_id=info:isbn/', @csf['isbn'])
+        openurl_param('rft_id=info:isbn:', @csf['isbn'], false) + openurl_param('isbn', @csf['isbn'])
       end
 
       def output_type
