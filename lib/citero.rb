@@ -6,7 +6,7 @@ module Citero
   require_relative 'citero/utils'
 
   def self.from_formats
-    [:csf, :openurl, :pnx]
+    [:csf, :openurl, :pnx, :pnx_json]
   end
 
   def self.to_formats
@@ -38,6 +38,8 @@ module Citero
         from = Citero::Inputs::OpenUrl.new(@input)
       when :pnx
         from = Citero::Inputs::Pnx.new(@input)
+      when :pnx_json
+        from = Citero::Inputs::PnxJson.new(@input)
       else
         raise ArgumentError
     end
@@ -57,6 +59,8 @@ module Citero
         from = Citero::Inputs::OpenUrl.new(@input)
       when :pnx
         from = Citero::Inputs::Pnx.new(@input)
+      when :pnx_json
+        from = Citero::Inputs::PnxJson.new(@input)
       else
         raise ArgumentError
     end
