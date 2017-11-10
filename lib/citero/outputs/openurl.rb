@@ -51,7 +51,7 @@ module Citero
       end
 
       def output_isbn
-        openurl_param('rft_id=info:isbn:', @csf['isbn'], false) + openurl_param('isbn', @csf['isbn'])
+        openurl_param('rft_id=urn:isbn:', @csf['isbn'], false) + openurl_param('isbn', @csf['isbn'])
       end
 
       def output_type
@@ -65,11 +65,28 @@ module Citero
       end
 
       def output_date
-        openurl_param('date', @csf['date'])
+        output = ""
+        output = openurl_param('date', @csf['issueDate']) if @csf['itemType'].eql?("patent")
+        output += openurl_param('date', @csf['date'])
+      end
+
+      def output_series
+        openurl_param('series', @csf['series'])
+      end
+      
+      def output_journalAbbreviation
+        openurl_param('stitle', @csf['journalAbbreviation'])
+      end
+      
+      def output_degree
+        openurl_param('degree', @csf['type'])
       end
 
       def output_title
-        openurl_param('title', @csf['title'])
+        openurl_key = 'title'
+        openurl_key = 'atitle' if ["journalArticle", "bookSection", "conferencePaper"].include?(@csf['itemType'])
+        openurl_key = 'btitle' if @csf['itemType'].eql?('book')
+        openurl_param(openurl_key, @csf['title'])
       end
 
       def output_author
@@ -77,7 +94,10 @@ module Citero
       end
 
       def output_bookTitle
-        openurl_param('btitle', @csf['bookTitle'])
+        output = ""
+        output = openurl_param('btitle', @csf['proceedingsTitle'])  if @csf['itemType'].eql?('bookSection')
+        output = openurl_param('btitle', @csf['publicationsTitle']) if @csf['itemType'].eql?('conferencePaper')
+        output += openurl_param('btitle', @csf['bookTitle'])
       end
 
       def output_publicationTitle
@@ -97,7 +117,11 @@ module Citero
       end
 
       def output_volume
-        openurl_param('volume', @csf['volume'])
+        output = ""
+        if @csf['itemType'].eql? "journalArticle"
+          output = openurl_param('volume', @csf['volume']) + openurl_param('volume', @csf['title'])
+        end
+        output += openurl_param('volume', @csf['volume'])
       end
 
       def output_reportNumber
@@ -113,7 +137,9 @@ module Citero
       end
 
       def output_publisher
-        openurl_param('publisher', @csf['publisher'])
+        output = ""
+        output = openurl_param('inst', @csf['publisher']) if @csf['itemType'].eql? "thesis"
+        output += openurl_param('publisher', @csf['publisher'])
       end
 
       def output_place
@@ -192,7 +218,10 @@ module Citero
           :output_numPages,
           :output_isbn,
           :output_issn,
-          :output_tags
+          :output_tags,
+          :output_series,
+          :output_journalAbbreviation,
+          :output_degree
         ]
       end
     end
