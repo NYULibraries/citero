@@ -1,7 +1,7 @@
 module Citero
   class CSF
     extend Forwardable
-    def_delegators :@data, :[], :[]=, :size, :each, :inspect, :to_s
+    def_delegators :@data, :[], :size, :each, :inspect, :to_s
     attr_reader :data
     alias_method :csf, :data
 
