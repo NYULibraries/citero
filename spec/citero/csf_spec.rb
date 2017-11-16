@@ -139,4 +139,46 @@ describe Citero::CSF do
       end
     end
   end
+  
+  describe "#keys" do
+    context "when the keys are snake cased" do
+      let(:input_data) { { key1: :value1, key2: :value2, "random_key": :random_value } }
+      it 'should get me a list of keys in the hash as lower snake case' do
+        expect(csf_object.keys).to eql([:key1, :key2, :random_key])
+      end
+    end
+    context "when the keys are camel cased" do
+      let(:input_data) { { key1: :value1, key2: :value2, "RandomKey": :random_value } }
+      it 'should get me a list of keys in the hash' do
+        expect(csf_object.keys).to eql([:key1, :key2, :random_key])
+      end
+    end
+  end
+  
+  describe "#respond_to?" do
+    let(:input_data) { { key1: :value1, key2: :value2, "random_key": :random_value } }
+    it 'should respond to keys' do
+      expect(csf_object.respond_to?(:key1)).to be true
+      expect(csf_object.respond_to?(:key2)).to be true
+      expect(csf_object.respond_to?(:random_key)).to be true
+    end
+  end
+  describe "#method_missing" do
+    context "when the keys are snake cased" do
+      let(:input_data) { { key1: :value1, key2: :value2, "random_key": :random_value } }
+      it 'should get value from keys' do
+        expect(csf_object.send(:key1)).to be :value1
+        expect(csf_object.send(:key2)).to be :value2
+        expect(csf_object.send(:random_key)).to be :random_value
+      end
+    end
+    context "when the keys are camel cased" do
+      let(:input_data) { { key1: :value1, key2: :value2, "randomKey": :random_value } }
+      it 'should get me a list of keys in the hash' do
+        expect(csf_object.send(:key1)).to be :value1
+        expect(csf_object.send(:key2)).to be :value2
+        expect(csf_object.send(:random_key)).to be :random_value
+      end
+    end
+  end
 end
