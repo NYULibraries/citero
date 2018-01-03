@@ -6,7 +6,7 @@ module Citero
 
       def initialize(raw_data)
         @json = raw_data
-        construct_csf
+        to_csf
         @csf
       end
 
