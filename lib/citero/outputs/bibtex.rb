@@ -119,7 +119,8 @@ module Citero
       end
 
       def cite_key_date
-        @csf['date']&.first&.gsub(/[^0-9]/,'') || "????"
+        cite_key_date = (!@csf['date'].is_a?(Array)) ? @csf['date'] : @csf['date']&.first
+        cite_key_date&.gsub(/[^0-9]/,'') || "????"
       end
 
       def export_type_map
