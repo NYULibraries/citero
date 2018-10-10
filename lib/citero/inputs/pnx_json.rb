@@ -60,7 +60,7 @@ module Citero
           "edition" => "edition",
           "tags" => "tags",
           "callNumber" => "callNumber",
-          "pnxRecordId" => "pnxRecordId",
+          "pnxRecordId" => "pnxId",
           "description" => "description",
           "notes" => "notes"
         }
