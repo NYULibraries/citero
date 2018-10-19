@@ -58,9 +58,9 @@ module Citero
           "date" => "date",
           "language" => "languageId",
           "edition" => "edition",
-          "tags" => "tags",
+          "tags" => "subject",
           "callNumber" => "callNumber",
-          "pnxRecordId" => "pnxRecordId",
+          "pnxRecordId" => "pnxId",
           "description" => "description",
           "notes" => "notes"
         }
