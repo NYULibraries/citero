@@ -95,7 +95,11 @@ module Citero
       end
 
       def output_date
-        ris_output_line('PY', @csf['date']&.first)
+        unless @csf['date'].is_a?(Array)
+          ris_output_line('PY', @csf['date'])
+        else
+          ris_output_line('PY', @csf['date']&.first)
+        end
       end
 
       def output_filingDate
