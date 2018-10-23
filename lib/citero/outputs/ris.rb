@@ -131,7 +131,11 @@ module Citero
       end
 
       def output_tags
-        ris_output_line('KW', @csf['tags']&.sort)
+        unless @csf['tags'].is_a?(Array)
+          ris_output_line('KW', @csf['tags'])
+        else
+          ris_output_line('KW', @csf['tags']&.sort)
+        end
       end
 
       def output_ris_end
