@@ -106,9 +106,10 @@ module Citero
         end
       end
 
-      def parse_and_add_publisher
-        return if [@json["publisher"]].compact.empty?
-        @json["publisher"].each do |json_pub|
+      def parse_and_add_publisher(publishers=[])
+        publishers.push(@json["publisher"])
+        return if publishers.compact.empty?
+        publishers.each do |json_pub|
           if json_pub.include? " : "
             pub_place, publisher = json_pub.split(" : ",2).map(&:strip)
             add_publisher_and_place(publisher, pub_place)
