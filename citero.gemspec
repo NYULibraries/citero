@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "ox", "~> 2.8"
   s.add_development_dependency "rake", "~> 10.0"
   s.add_development_dependency "json", "~> 1.8"
-  s.add_development_dependency "bundler", "~> 1.2"
+  # s.add_development_dependency "bundler", "~> 1.2"
   s.add_development_dependency "rspec", "~> 3.5"
   s.add_development_dependency "pry", "~> 0.10"
 end
