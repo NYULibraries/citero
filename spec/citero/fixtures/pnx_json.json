@@ -1,0 +1,366 @@
+{
+  "date": "1993",
+  "sourceId": "nyu_aleph",
+  "note": "Includes bibliographical references and index.",
+  "creationdate": "c1993",
+  "notes": "Includes bibliographical references and index.",
+  "deliveryInstitution": "NYU",
+  "subject": [
+    "Salinger, J. D. (Jerome David), 1919-2010. Catcher in the rye",
+    "Caulfield, Holden (Fictitious character)",
+    "Runaway teenagers in literature",
+    "Teenage boys in literature"
+  ],
+  "sourceSystem": "Aleph",
+  "isbn": [
+    "9780805719338",
+    "0805719334"
+  ],
+  "description": [
+    "Provides in-depth analysis of the literary work The Catcher in the Rye, as well as its importance and critical reception. Includes a chronology of the life and works of the author."
+  ],
+  "language": [
+    "http:\/\/id.loc.gov\/vocabulary\/iso639-2\/eng"
+  ],
+  "source": "nyu_aleph",
+  "type": "book",
+  "title": "The catcher in the rye innocence under pressure",
+  "relation": [
+    {
+      "@id": "_:0",
+      "label": "series ",
+      "type": "series ",
+      "relatedTitle": "Gale virtual reference library "
+    }
+  ],
+  "beaconO22": "43",
+  "addau": [
+    "Gale Group"
+  ],
+  "frbrType": "6",
+  "institution": "NYU",
+  "enrichment": {
+    "virtualBrowseObject": {
+      "callNumber": "PS3537.A426 C36 1993 Electronic access",
+      "isVirtualBrowseEnabled": true,
+      "callNumberBrowseField": "browse_callnumber.0"
+    }
+  },
+  "contributor": [
+    "Gale Group"
+  ],
+  "ilsAPIid": "NYU01004508721",
+  "@TYPE": "book",
+  "rights": [
+    "Access is restricted to users affiliated with licensed institutions."
+  ],
+  "context": "L",
+  "modified": "Tue Feb 25 14:43:37 EST 2020",
+  "lang3": "eng",
+  "@id": "https:\/\/bobcat.library.nyu.edu\/primo_library\/libweb\/webservices\/rest\/v1\/pnxs\/L\/nyu_aleph004508721?inst=NYU",
+  "identifier": [
+    {
+      "idType": "http:\/\/purl.org\/dc\/terms\/type\/pnx",
+      "@id": "_:0",
+      "id": "nyu_aleph004508721"
+    },
+    {
+      "idType": "http:\/\/purl.org\/dc\/terms\/type\/frbrgroupid",
+      "@id": "_:1",
+      "id": "-1"
+    },
+    {
+      "idType": "http:\/\/purl.org\/dc\/terms\/type\/isbn",
+      "@id": "_:2",
+      "id": "9780805719338"
+    }
+  ],
+  "delivery": {
+    "availabilityLinks": [
+      "directlink"
+    ],
+    "physicalItemTextCodes": "",
+    "displayLocation": false,
+    "availabilityLinksUrl": [
+      "http:\/\/proxy.library.nyu.edu\/login?url=https:\/\/find.galegroup.com\/openurl\/openurl?url_ver=Z39.88-2004&url_ctx_fmt=info:ofi\/fmt:kev:mtx:ctx&req_dat=info:sid\/gale:ugnid:new64731&res_id=info:sid\/gale:GVRL&ctx_enc=info:ofi:enc:UTF-8&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft_id=info:sid\/gale:bmcode:recid\/3FCS"
+    ],
+    "link": [
+      {
+        "displayLabel": "thumbnail",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/syndetics.com\/index.aspx?isbn=9780805719338\/SC.JPG&client=primo",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/thumbnail",
+        "@id": "_:0"
+      },
+      {
+        "displayLabel": "Check for Amazon Search Inside",
+        "hyperlinkText": "Check for Amazon Search Inside",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/www.amazon.com\/gp\/reader\/9780805719338",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktotoc",
+        "@id": "_:1"
+      },
+      {
+        "displayLabel": "linktoprice",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/resolve?umlaut.institution=&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktoprice",
+        "@id": "_:2"
+      },
+      {
+        "displayLabel": "lln42",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/ares.library.nyu.edu\/remoteauth\/ares.dll?Action=10&Form=21&Title=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&CitedIn=nyu_aleph004508721&ISXN=",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln42",
+        "@id": "_:3"
+      },
+      {
+        "displayLabel": "lln10",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/resolve?&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln10",
+        "@id": "_:4"
+      },
+      {
+        "displayLabel": "lln43",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/ares.library.nyu.edu\/remoteauth\/ares.dll?Action=10&Form=2&Value=IRFVideo&title=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&Author=Gale%20Group.&PubDate=1993&CallNumber=PS3537.A426%20C36%201993&ItemFormatAudioVideo=book&CitedIn=nyu_aleph004508721",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln43",
+        "@id": "_:5"
+      },
+      {
+        "displayLabel": "Gale Virtual Reference Library",
+        "hyperlinkText": "Gale Virtual Reference Library",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/proxy.library.nyu.edu\/login?url=https:\/\/find.galegroup.com\/openurl\/openurl?url_ver=Z39.88-2004&url_ctx_fmt=info:ofi\/fmt:kev:mtx:ctx&req_dat=info:sid\/gale:ugnid:new64731&res_id=info:sid\/gale:GVRL&ctx_enc=info:ofi:enc:UTF-8&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft_id=info:sid\/gale:bmcode:recid\/3FCS",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktorsrc",
+        "@id": "_:6"
+      },
+      {
+        "displayLabel": "lln11",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/resolve?umlaut.institution=NYUAD&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln11",
+        "@id": "_:7"
+      },
+      {
+        "displayLabel": "lln44",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln44",
+        "@id": "_:8"
+      },
+      {
+        "displayLabel": "lln12",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/resolve?umlaut.institution=NYUSH&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln12",
+        "@id": "_:9"
+      },
+      {
+        "displayLabel": "openurlfulltext",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/search\/journal_search?&ctx_ver=Z39.88-2004&sfx.ignore_date_threshold=1&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&svc_val_fmt=info:ofi\/fmt:kev:mtx:sch_svc&svc.fulltext=yes&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng&rft_pqid=&rft_id=info:pmid\/&rft_galeid=&rft_cupid=&rft_eruid=&rft_nurid=&rft_ingid=",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/openurlfulltext",
+        "@id": "_:10"
+      },
+      {
+        "displayLabel": "lln40",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/ill-proxy.library.nyu.edu\/illiad\/illiad.dll\/OpenURL?LoanTitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&LoanAuthor=Pinsker,%20Sanford&LoanDate=1993&ISSN=9780805719338&AcceptNonEnglish=Yes&AcceptAlternateEdition=No&Ariel=Yes&ShippingOptions=NYU%20Shanghai&Notes=recordid-004508721%20CallNumber-CallNumber-PS3537.A426 C36 1993",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln40",
+        "@id": "_:11"
+      },
+      {
+        "displayLabel": "lln41",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/ares.library.nyu.edu\/remoteauth\/ares.dll?Action=10&Form=30&linktype=openurl&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.au=Pinsker,%20Sanford&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.isbn=9780805719338&rft.primo=nyu_aleph004508721",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln41",
+        "@id": "_:12"
+      },
+      {
+        "displayLabel": "openurl",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/search\/journal_search?&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng&rft_pqid=&rft_id=info:pmid\/&rft_galeid=&rft_cupid=&rft_eruid=&rft_nurid=&rft_ingid=",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/openurl",
+        "@id": "_:13"
+      },
+      {
+        "displayLabel": "More bibliographic information",
+        "hyperlinkText": "More bibliographic information",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/aleph.library.nyu.edu\/F?func=direct&local_base=PRIMOCOMMON&doc_number=004508721",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/backlink",
+        "@id": "_:14"
+      },
+      {
+        "displayLabel": "lln13",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/getit.library.nyu.edu\/resolve?umlaut.institution=CU&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln13",
+        "@id": "_:15"
+      },
+      {
+        "displayLabel": "Check Availability:NYU BWEB Internet Resources (PS3537.A426 C36 1993 Electronic access )",
+        "hyperlinkText": "Check Availability:NYU BWEB Internet Resources (PS3537.A426 C36 1993 Electronic access )",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/aleph.library.nyu.edu\/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=004508721&sub_library=BWEB&collection=BNYUI",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln14",
+        "@id": "_:16"
+      },
+      {
+        "displayLabel": "Gale Virtual Reference Library (NYU Access)",
+        "hyperlinkText": "Gale Virtual Reference Library (NYU Access)",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/proxy.library.nyu.edu\/login?url=https:\/\/find.galegroup.com\/openurl\/openurl?url_ver=Z39.88-2004&url_ctx_fmt=info:ofi\/fmt:kev:mtx:ctx&req_dat=info:sid\/gale:ugnid:new64731&res_id=info:sid\/gale:GVRL&ctx_enc=info:ofi:enc:UTF-8&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft_id=info:sid\/gale:bmcode:recid\/3FCS",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln26",
+        "@id": "_:17"
+      },
+      {
+        "displayLabel": "Gale Virtual Reference Library",
+        "hyperlinkText": "Gale Virtual Reference Library",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/proxy.library.nyu.edu\/login?url=https:\/\/find.galegroup.com\/openurl\/openurl?url_ver=Z39.88-2004&url_ctx_fmt=info:ofi\/fmt:kev:mtx:ctx&req_dat=info:sid\/gale:ugnid:new64731&res_id=info:sid\/gale:GVRL&ctx_enc=info:ofi:enc:UTF-8&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft_id=info:sid\/gale:bmcode:recid\/3FCS",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/lln16",
+        "@id": "_:18"
+      },
+      {
+        "displayLabel": "linktoholdings",
+        "hyperlinkText": "",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/aleph.library.nyu.edu\/F?func=item-global&doc_library=NYU01&local_base=PRIMOCOMMON&doc_number=004508721",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktoholdings",
+        "@id": "_:19"
+      },
+      {
+        "displayLabel": "Copy item link",
+        "hyperlinkText": "Copy item link",
+        "inst4opac": "NYU",
+        "linkURL": "https:\/\/library.nyu.edu\/persistent\/lcn\/nyu_aleph004508721?institution=NYU&persistent",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktoreview",
+        "@id": "_:20"
+      },
+      {
+        "displayLabel": "Check Amazon",
+        "hyperlinkText": "Check Amazon",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/www.amazon.com\/gp\/product\/9780805719338",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktouc",
+        "@id": "_:21"
+      },
+      {
+        "displayLabel": "Check other libraries (WorldCat®)",
+        "hyperlinkText": "Check other libraries (WorldCat®)",
+        "inst4opac": "NYU",
+        "linkURL": "http:\/\/www.worldcat.org\/search?q=isbn%3A9780805719338",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/linktouc",
+        "@id": "_:22"
+      },
+      {
+        "displayLabel": "thumbnail",
+        "linkURL": "https:\/\/syndetics.com\/index.aspx?isbn=9780805719338\/SC.JPG&client=primo",
+        "linkType": "http:\/\/purl.org\/pnx\/linkType\/thumbnail",
+        "@id": "_:23"
+      }
+    ],
+    "availability": [
+      "not_restricted"
+    ],
+    "additionalLocations": false,
+    "displayedAvailability": "not_restricted",
+    "holding": [],
+    "deliveryCategory": [
+      "Online Resource"
+    ],
+    "serviceMode": [
+      "display"
+    ],
+    "feDisplayOtherLocations": false,
+    "GetIt2": {
+      "isLinktoOnline": false,
+      "displayText": "openurl",
+      "hyperlinkText": "",
+      "getItTabText": "tab2_onl_norestrict",
+      "link": "https:\/\/getit.library.nyu.edu\/search\/journal_search?&ctx_ver=Z39.88-2004&ctx_enc=info:ofi\/enc:UTF-8&ctx_tim=2020-02-25T14%3A43%3A37IST&url_ver=Z39.88-2004&url_ctx_fmt=infofi\/fmt:kev:mtx:ctx&rfr_id=info:sid\/primo.exlibrisgroup.com:primo-nyu_aleph004508721&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft.genre=book&rft.jtitle=&rft.btitle=The%20catcher%20in%20the%20rye%20innocence%20under%20pressure&rft.aulast=Pinsker&rft.aufirst=Sanford.&rft.auinit=&rft.auinit1=&rft.auinitm=&rft.ausuffix=&rft.au=Pinsker,%20Sanford&rft.aucorp=&rft.volume=&rft.issue=&rft.part=&rft.quarter=&rft.ssn=&rft.spage=&rft.epage=&rft.pages=&rft.artnum=&rft.pub=Twayne%20Publishers%20;%20Maxwell%20Macmillan%20Canada%20;%20Maxwell%20Macmillan%20International&rft.place=New%20York%20:%20Toronto%20:%20New%20York&rft.issn=&rft.eissn=&rft.isbn=9780805719338&rft.sici=&rft.coden=&rft_id=info:doi\/&rft.object_id=&rft.primo=nyu_aleph004508721&rft.eisbn=&rft_dat=%3Cnyu_aleph%3E004508721%3C\/nyu_aleph%3E%3Cgrp_id%3E-1%3C\/grp_id%3E%3Coa%3E%3C\/oa%3E%3Curl%3E%3C\/url%3E&rft_id=info:oai\/&req.language=eng&rft_pqid=&rft_id=info:pmid\/&rft_galeid=&rft_cupid=&rft_eruid=&rft_nurid=&rft_ingid=",
+      "@id": "_:0",
+      "serviceModeGetit2": "display"
+    },
+    "GetIt1": [
+      {
+        "links": [
+          {
+            "isLinktoOnline": true,
+            "displayText": "Gale Virtual Reference Library",
+            "hyperlinkText": "Gale Virtual Reference Library",
+            "getItTabText": "tab1_onl_norestrict",
+            "link": "http:\/\/proxy.library.nyu.edu\/login?url=https:\/\/find.galegroup.com\/openurl\/openurl?url_ver=Z39.88-2004&url_ctx_fmt=info:ofi\/fmt:kev:mtx:ctx&req_dat=info:sid\/gale:ugnid:new64731&res_id=info:sid\/gale:GVRL&ctx_enc=info:ofi:enc:UTF-8&rft_val_fmt=info:ofi\/fmt:kev:mtx:book&rft_id=info:sid\/gale:bmcode:recid\/3FCS",
+            "@id": "_:0"
+          }
+        ],
+        "category": "Online Resource"
+      }
+    ]
+  },
+  "creator": [
+    "Pinsker, Sanford"
+  ],
+  "format": "1 online resource (xvi, 107 p.).",
+  "languageId": [
+    "eng"
+  ],
+  "oclcid": "632164824",
+  "pnxId": "nyu_aleph004508721",
+  "@context": "https:\/\/open-na.hosted.exlibrisgroup.com\/primo\/contexts\/pnx",
+  "originalSourceId": "NYU01",
+  "seriestitle": [
+    "Gale virtual reference library",
+    "Twayne's masterwork studies ; no. 114",
+    "Masterworks studies",
+    "Masterwork studies",
+    "Twayne's masterworks studies",
+    "Twayne's masterwork studies series",
+    "Twayne's masterwork series"
+  ],
+  "au": [
+    "Pinsker, Sanford"
+  ],
+  "series": [
+    "Gale virtual reference library",
+    "Twayne's masterwork studies ; no. 114",
+    "Masterworks studies",
+    "Masterwork studies",
+    "Twayne's masterworks studies",
+    "Twayne's masterwork studies series",
+    "Twayne's masterwork series"
+  ],
+  "isbn13": [
+    "9780805719338"
+  ],
+  "publisher": [
+    "New York : Twayne Publishers ; Toronto : Maxwell Macmillan Canada ; New York : Maxwell Macmillan International"
+  ],
+  "topic": [
+    "Salinger, J. D. (Jerome David), 1919-2010. Catcher in the rye",
+    "Caulfield, Holden (Fictitious character)",
+    "Runaway teenagers in literature",
+    "Teenage boys in literature"
+  ],
+  "isbn10": [
+    "0805719334"
+  ],
+  "sourcerecordid": "004508721",
+  "oclcnum": "632164824"
+}

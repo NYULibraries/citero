@@ -79,18 +79,23 @@ module Citero
       end
 
 
-      def parse_and_add_creators
-        contributors = []
-        creator = [@json["creator"]].compact
+      def parse_and_add_creators(creators=[],contributors=[])
+        # Attempt to add creator from creator field
+        creators = creators.push(@json["creator"]).compact
+        # If can't find creator, treat contributor as creator
+        if creators.empty?
+          creators = creators.push(@json["contributor"]).compact
+        # If we already have a creator, add contributors as contributors
+        else
+          contributors = [@json["contributor"]].compact 
+        end
+        # If we got here and have no creators or contributors try addau field
+        if (creators.empty? && contributors.empty?)
+          creators = creators.push(@json["addau"]).compact
+        end
 
-        creators = @json["creator"]
-        creators = @json["contributor"] if creator.empty?
-        contributors = @json["contributor"] unless creator.empty?
-
-        creators = @json["addau"] if (creator.empty? && [@json["contributor"]].compact.empty?)
-
-        add_creators(creators, "author")
-        add_creators(contributors, "contributor")
+        add_creators(creators.flatten, "author")
+        add_creators(contributors.flatten, "contributor")
       end
 
       def add_creators(creators,creator_type)
