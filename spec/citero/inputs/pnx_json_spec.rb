@@ -16,6 +16,10 @@ describe Citero::Inputs::PnxJson do
       it 'should be valid CSF' do
         expect { subject }.to_not raise_error
       end
+      describe 'contributor' do
+        subject { pnx_json.csf["contributor" ]}
+        it { is_expected.to eql 'Gale Group' }
+      end
     end
     context 'when contributor is an array' do
       let(:raw_pnx_json) { pnx_json_with_array }
@@ -24,5 +28,4 @@ describe Citero::Inputs::PnxJson do
       end
     end
   end
-
 end
