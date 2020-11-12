@@ -1,3 +1,4 @@
+require 'forwardable'
 module Citero
   class CSF
     extend Forwardable
