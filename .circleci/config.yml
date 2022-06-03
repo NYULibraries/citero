@@ -1,15 +1,26 @@
+docker-defaults: &docker-defaults
+  docker:
+    - image: quay.io/nyulibraries/circleci_docker:18.06.1-dc-1.23.2-0
+  working_directory: ~/app
+
 version: 2
 jobs:
-  build:
-    docker:
-       - image: circleci/ruby:2.5.1
-    working_directory: ~/app
+  test-and-build-image:
+    <<: *docker-defaults
     steps:
       - checkout
+      - setup_remote_docker
       - run:
-          name: install dependencies
+          name: Build
           command: |
-            bundle install --jobs=4 --retry=3 --path ./vendor/bundle
+            docker-compose build
       - run:
-          name: run tests
-          command: bundle exec rspec
+          name: Test
+          command: |
+            docker-compose run test
+
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test-and-build-image
