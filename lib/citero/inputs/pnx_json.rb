@@ -46,7 +46,8 @@ module Citero
           "webpage",
           "journal",
           "map",
-          "thesis"
+          "thesis",
+          "database"
         ]
       end
 
