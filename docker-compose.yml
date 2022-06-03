@@ -6,3 +6,5 @@ services:
     image: citero
     build: .
     command: bundle exec rspec
+      #volumes:
+      #  - ./:/app/
