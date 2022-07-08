@@ -32,8 +32,8 @@ module Citero
 
       def item_type_conversion_hash
         @item_type_conversion_hash ||= {
-          "audio"   =>    "audioRecording",
-          "video"   =>    "videoRecording",
+          #"audio"   =>    "audioRecording",
+          #"video"   =>    "videoRecording",
           "article" =>    "journalArticle",
           "books"   =>    "book",
         }
