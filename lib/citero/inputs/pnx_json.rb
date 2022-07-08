@@ -47,7 +47,19 @@ module Citero
           "journal",
           "map",
           "thesis",
-          "database"
+          "database",
+          "archives",
+          "audio",
+          "equipment",
+          "geospatial_data",
+          "image",
+          "other",
+          "score",
+          "software",
+          "statistical_data_set",
+          "text_resource",
+          "video",
+          "website",
         ]
       end
 
