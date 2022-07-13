@@ -190,6 +190,7 @@ module Citero
            conferencePaper: 'conference',
                     thesis: 'dissertation',
             videoRecording: 'film',
+                     video: 'film',
             journalArticle: 'journal',
            magazineArticle: 'magazine',
           newspaperArticle: 'newspaper',
